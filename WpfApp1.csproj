@@ -16,12 +16,4 @@
     <None Remove="image_processing20210616-28547-4dos3y.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="10613107.png" />
-    <Resource Include="4875945-middle.png" />
-    <Resource Include="icons8-history-50.png" />
-    <Resource Include="icons8-menu-50.png" />
-    <Resource Include="image_processing20210616-28547-4dos3y.png" />
-  </ItemGroup>
-
 </Project>

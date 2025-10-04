@@ -103,22 +103,22 @@ namespace WpfApp1
                     {
                         case '+':
                             MainCalculateScreen.Text = (firstNumber + secondNumber).ToString();
-                            SecondaryScreen.Text = MainCalculateScreen.Text + " " + op;
+                            SecondaryScreen.Text = MainCalculateScreen.Text + " " + operation;
                             break;
                         case '-':
                             MainCalculateScreen.Text = (firstNumber - secondNumber).ToString();
-                            SecondaryScreen.Text = MainCalculateScreen.Text + " " + op;
+                            SecondaryScreen.Text = MainCalculateScreen.Text + " " + operation;
                             break;
                         case '×':
                             MainCalculateScreen.Text = (firstNumber * secondNumber).ToString();
-                            SecondaryScreen.Text = MainCalculateScreen.Text + " " + op;
+                            SecondaryScreen.Text = MainCalculateScreen.Text + " " + operation;
                             break;
                         case '÷':
                             if (secondNumber != 0)
                             {
 
                                 MainCalculateScreen.Text = (firstNumber / secondNumber).ToString();
-                                SecondaryScreen.Text = MainCalculateScreen.Text + " " + op;
+                                SecondaryScreen.Text = MainCalculateScreen.Text + " " + operation;
                             }
                             else
                                 MainCalculateScreen.Text = "Error";
@@ -139,7 +139,29 @@ namespace WpfApp1
 
         private void ButtonEqual(object sender, RoutedEventArgs e)
         {
-            //HandleOperationButton("=");
+            SecondaryScreen.Text += " " + MainCalculateScreen.Text + " =";
+            isOperationClicked = true;
+            int firstNumber = int.Parse(SecondaryScreen.Text.Split(' ')[0]);
+            int secondNumber = int.Parse(MainCalculateScreen.Text);
+            char op = SecondaryScreen.Text.Split(' ')[1][0];
+            switch (op)
+            {
+                case '+':
+                    MainCalculateScreen.Text = (firstNumber + secondNumber).ToString();
+                    break;
+                case '-':
+                    MainCalculateScreen.Text = (firstNumber - secondNumber).ToString();
+                    break;
+                case '×':
+                    MainCalculateScreen.Text = (firstNumber * secondNumber).ToString();
+                    break;
+                case '÷':
+                    if (secondNumber != 0)
+                        MainCalculateScreen.Text = (firstNumber / secondNumber).ToString();
+                    else
+                        MainCalculateScreen.Text = "Error";
+                    break;
+            }
         }
 
         private void ButtonPlus(object sender, RoutedEventArgs e)
@@ -170,15 +192,6 @@ namespace WpfApp1
         {
 
         }
-
-
-
-
-
-
-
-
-
 
         private void ButtonSqrt(object sender, RoutedEventArgs e)
         {
