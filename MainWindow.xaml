@@ -78,7 +78,7 @@
                 <Button Content="" Width="22" Height="22" Click="ButtonMenu" 
                         Style="{StaticResource MemoryButton}">
                     <Button.Background>
-                        <ImageBrush ImageSource="/icons8-menu-50.png"/>
+                        <ImageBrush ImageSource="images/icons8-menu-50.png"/>
                     </Button.Background>
                 </Button>
                 <TextBlock Text="Standard" Foreground="White" FontSize="14" 
@@ -88,7 +88,7 @@
             <Button Grid.Column="2" Width="22" Height="22" Click="ButtonHistory"
                     Style="{StaticResource MemoryButton}">
                 <Button.Background>
-                    <ImageBrush ImageSource="/icons8-history-50.png"/>
+                    <ImageBrush ImageSource="images/icons8-history-50.png"/>
                 </Button.Background>
             </Button>
         </Grid>
