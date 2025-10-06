@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Calculate" Height="557" Width="339" Background="#FF251E1E">
+        Title="Calculate" Height="557" Width="339" Background="#FF251E1E"
+        Icon="H:/C#Code/WpfApp1/images/calculator-icon-31.jpg">
 
     <Window.Resources>
         <!-- Style cho button số -->
