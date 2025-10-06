@@ -8,7 +8,7 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         private bool isOperationClicked = false;
-
+        private bool isEqualClicked = false;
 
 
 
@@ -17,20 +17,34 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
-
+        private void resetCalculator()
+        {
+            MainCalculateScreen.Text = "0";
+            SecondaryScreen.Text = "";
+            isOperationClicked = false;
+            isEqualClicked = false;
+        }
         private void HandleNumericButton(string number)
         {
+            if (isEqualClicked)
+            {
+                SecondaryScreen.Text = "";
+                isEqualClicked = false;
+                MainCalculateScreen.Text = "0";
+            }
             if (!isOperationClicked)
             {
                 if (MainCalculateScreen.Text == "0")
                 {
                     MainCalculateScreen.Text = number;
                     isOperationClicked = false;
+                    isEqualClicked = false;
                 }
                 else
                 {
                     MainCalculateScreen.Text += number;
-                    isOperationClicked = false;
+                    isOperationClicked = false; 
+                    isEqualClicked = false;
                 }
             }
             else
@@ -96,6 +110,7 @@ namespace WpfApp1
                 if (SecondaryScreen.Text.Length > 0)
                 {
                     isOperationClicked = true;
+                    isEqualClicked = false;
                     int firstNumber = int.Parse(SecondaryScreen.Text.Split(' ')[0]);
                     int secondNumber = int.Parse(MainCalculateScreen.Text);
                     char op = SecondaryScreen.Text.Split(' ')[1][0];
@@ -129,6 +144,7 @@ namespace WpfApp1
                 {
                     SecondaryScreen.Text = MainCalculateScreen.Text + " " + operation;
                     isOperationClicked = true;
+                    isEqualClicked = false;
                 }
             }
             else if (SecondaryScreen.Text.Length > 0)
@@ -140,7 +156,7 @@ namespace WpfApp1
         private void ButtonEqual(object sender, RoutedEventArgs e)
         {
             SecondaryScreen.Text += " " + MainCalculateScreen.Text + " =";
-            isOperationClicked = true;
+            isEqualClicked = true;
             int firstNumber = int.Parse(SecondaryScreen.Text.Split(' ')[0]);
             int secondNumber = int.Parse(MainCalculateScreen.Text);
             char op = SecondaryScreen.Text.Split(' ')[1][0];
@@ -208,9 +224,14 @@ namespace WpfApp1
 
         }
 
+
         private void ButtonBackspace(object sender, RoutedEventArgs e)
         {
-            if (MainCalculateScreen.Text == "0")
+            if (isEqualClicked)
+            {
+                SecondaryScreen.Text = "";
+            }
+            else if (MainCalculateScreen.Text == "0")
                 return;
             else if (MainCalculateScreen.Text.Length == 1)
                 MainCalculateScreen.Text = "0";
