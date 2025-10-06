@@ -155,11 +155,20 @@ namespace WpfApp1
 
         private void ButtonEqual(object sender, RoutedEventArgs e)
         {
-            SecondaryScreen.Text += " " + MainCalculateScreen.Text + " =";
+            if (SecondaryScreen.Text.Length == 0 || isOperationClicked)
+                return;
+            
             isEqualClicked = true;
-            float firstNumber = float.Parse(SecondaryScreen.Text.Split(' ')[0]);
-            float secondNumber = float.Parse(MainCalculateScreen.Text);
+            float? firstNumber = float.Parse(SecondaryScreen.Text.Split(' ')[0]);
+            float? secondNumber = float.Parse(MainCalculateScreen.Text);
             char op = SecondaryScreen.Text.Split(' ')[1][0];
+            if (SecondaryScreen.Text.Contains("=")){
+                SecondaryScreen.Text = "";
+                SecondaryScreen.Text = firstNumber + " " + op + " " + secondNumber + " =";
+            } else { 
+                SecondaryScreen.Text += " " + MainCalculateScreen.Text + " =";
+            }
+            
             switch (op)
             {
                 case '+':
