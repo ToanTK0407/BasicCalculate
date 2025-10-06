@@ -43,7 +43,7 @@ namespace WpfApp1
                 else
                 {
                     MainCalculateScreen.Text += number;
-                    isOperationClicked = false; 
+                    isOperationClicked = false;
                     isEqualClicked = false;
                 }
             }
@@ -111,8 +111,8 @@ namespace WpfApp1
                 {
                     isOperationClicked = true;
                     isEqualClicked = false;
-                    int firstNumber = int.Parse(SecondaryScreen.Text.Split(' ')[0]);
-                    int secondNumber = int.Parse(MainCalculateScreen.Text);
+                    float firstNumber = float.Parse(SecondaryScreen.Text.Split(' ')[0]);
+                    float secondNumber = float.Parse(MainCalculateScreen.Text);
                     char op = SecondaryScreen.Text.Split(' ')[1][0];
                     switch (op)
                     {
@@ -157,8 +157,8 @@ namespace WpfApp1
         {
             SecondaryScreen.Text += " " + MainCalculateScreen.Text + " =";
             isEqualClicked = true;
-            int firstNumber = int.Parse(SecondaryScreen.Text.Split(' ')[0]);
-            int secondNumber = int.Parse(MainCalculateScreen.Text);
+            float firstNumber = float.Parse(SecondaryScreen.Text.Split(' ')[0]);
+            float secondNumber = float.Parse(MainCalculateScreen.Text);
             char op = SecondaryScreen.Text.Split(' ')[1][0];
             switch (op)
             {
@@ -201,27 +201,51 @@ namespace WpfApp1
         }
         private void ButtonDecimalPoint(object sender, RoutedEventArgs e)
         {
-
+            if (MainCalculateScreen.Text.Contains(".") || isEqualClicked || isOperationClicked)
+                return;
+            else
+                MainCalculateScreen.Text += ".";
         }
 
         private void ButtonChangeSign(object sender, RoutedEventArgs e)
         {
-
+            if (MainCalculateScreen.Text != "0" && (!isOperationClicked && !isEqualClicked))
+            {
+                if (MainCalculateScreen.Text.StartsWith("-"))
+                    MainCalculateScreen.Text = MainCalculateScreen.Text.Substring(1);
+                else
+                    MainCalculateScreen.Text = "-" + MainCalculateScreen.Text;
+            }
         }
 
         private void ButtonSqrt(object sender, RoutedEventArgs e)
         {
+            if (!SecondaryScreen.Text.Contains("√")){
+                SecondaryScreen.Text = "√(" + MainCalculateScreen.Text + ")";
+            }
+            else
+            {
+                SecondaryScreen.Text = "√(" + SecondaryScreen.Text + ")";
+            }
 
+            MainCalculateScreen.Text = Math.Sqrt((float.Parse(MainCalculateScreen.Text))).ToString();
         }
 
         private void ButtonPowerTwo(object sender, RoutedEventArgs e)
         {
-
+            MainCalculateScreen.Text = (float.Parse(MainCalculateScreen.Text) * float.Parse(MainCalculateScreen.Text)).ToString();
+            if (!SecondaryScreen.Text.Contains("sqr")){
+                SecondaryScreen.Text = "sqr(" + MainCalculateScreen.Text + ")";
+            }
+            else
+            {
+                SecondaryScreen.Text = "sqr(" + SecondaryScreen.Text + ")";
+            }
         }
 
         private void ButtonReciprocal(object sender, RoutedEventArgs e)
         {
-
+            MainCalculateScreen.Text = (1 / float.Parse(MainCalculateScreen.Text)).ToString();
         }
 
 
@@ -241,17 +265,29 @@ namespace WpfApp1
 
         private void Buttonclear(object sender, RoutedEventArgs e)
         {
-
+            resetCalculator();
         }
 
         private void ButtonClearEntry(object sender, RoutedEventArgs e)
         {
-
+            if (isEqualClicked)
+            {
+                resetCalculator();
+            }
+            else
+            {
+                MainCalculateScreen.Text = "0";
+            }
         }
 
         private void ButtonRemainder(object sender, RoutedEventArgs e)
         {
-
+            if (MainCalculateScreen.Text != "0" && (!isOperationClicked && !isEqualClicked))
+            {
+                float number = float.Parse(MainCalculateScreen.Text) / 10;
+                MainCalculateScreen.Text = number.ToString();
+                SecondaryScreen.Text = number.ToString();
+            }
         }
 
         private void ButtonMDown(object sender, RoutedEventArgs e)
